@@ -32,8 +32,14 @@ const HomePage = observer(() => {
     return () => unSubscribe()
   }, [])
   return (
-    <div>
-      <div>test the data in firestroe </div>
+    <div className="w-[100vw] h-[100vh]">
+      <div className="w-full font-bold flex justify-center items-center ">
+        test the data in firestroe{" "}
+      </div>
+      <div className="w-full  flex justify-center items-center ">
+        the functions and structure will help you learn on the firestore and the
+        auth functions .{" "}
+      </div>
       <Button variant="outlined" className="" onClick={getTestsApi}>
         get all tests
       </Button>
