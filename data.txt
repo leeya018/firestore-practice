@@ -1,0 +1,23 @@
+
+the data: 
+User {
+    userId , 
+    name ,
+}
+
+likes {
+    userId , 
+    likeUrl :string
+    date:Date
+}
+messages {
+    userId , 
+    amount :number
+    date:Date
+}
+
+addUser(uid , name, date , email)
+
+addMessageCount(userId )
+
+addLike(userId, likeUrl)
