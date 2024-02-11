@@ -19,16 +19,6 @@ import {
   getTestsSnapApi,
 } from "@/api/firestore"
 
-const newMessage = {
-  userId: "1232",
-  amount: 1,
-  createdDate: Timestamp.now(),
-}
-const newLike = {
-  userId: "pluyf1",
-  likeUrl: "p903kslpp3l3/tinder/l3893789",
-  createdDate: Timestamp.now(),
-}
 const newTest: Test = {
   name: "test12",
   count: 3,
