@@ -5,18 +5,6 @@ import { observer } from "mobx-react-lite"
 import { Timestamp } from "firebase/firestore"
 import { Button } from "@mui/material"
 
-import {
-  addTest,
-  deleteAllTests,
-  deleteTest,
-  editTest,
-  getSnapshotForDoc,
-  getTests,
-  getTestsById,
-  getTestsByIdSnap,
-  getTestsQuery,
-  getTestsSnap,
-} from "@/api/firestore/test"
 import { Test } from "@/api/firestore/test/interfaces"
 import {
   addTestApi,
