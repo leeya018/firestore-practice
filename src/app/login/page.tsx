@@ -5,13 +5,35 @@ import { observer } from "mobx-react-lite"
 import { Button } from "@mui/material"
 import Link from "next/link"
 import { NavNames } from "@/util"
-import { signInWithEmailAndPassword } from "firebase/auth"
+import {
+  onAuthStateChanged,
+  signInWithEmailAndPassword,
+  signOut,
+} from "firebase/auth"
 import { auth } from "@/firebase"
 
 function login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+  const [email, setEmail] = useState("lee@gmail.com")
+  const [password, setPassword] = useState("123456")
   const [message, setMessage] = useState("")
+
+  useEffect(() => {
+    // listen to the change in the user state
+    const unSub = onAuthStateChanged(auth, (user) => {
+      console.log("there is a change in the user state", user)
+    })
+
+    return () => unSub()
+  }, [])
+
+  const logout = async () => {
+    try {
+      await signOut(auth)
+      console.log("user Logged out")
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
 
   const login = async () => {
     console.log(email, password)
@@ -58,9 +80,13 @@ function login() {
           >
             to signup
           </Link>
+
           <div className="w-full flex justify-center items-center">
             {message}
           </div>
+          <Button variant="outlined" className="w-20 h-10" onClick={logout}>
+            Logout
+          </Button>
         </div>
       </div>
     </div>
