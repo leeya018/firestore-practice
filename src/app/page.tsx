@@ -19,7 +19,6 @@ import {
   getTestsSnapApi,
 } from "@/api/firestore"
 import Navbar from "@/components/navbar"
-import ProtectedRout from "@/components/protectedRout"
 import useAuth from "@/hooks/useAuth"
 import { useRouter } from "next/navigation"
 
