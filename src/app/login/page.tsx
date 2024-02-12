@@ -11,11 +11,13 @@ import {
   signOut,
 } from "firebase/auth"
 import { auth } from "@/firebase"
+import { useRouter } from "next/navigation"
 
 function login() {
   const [email, setEmail] = useState("lee@gmail.com")
   const [password, setPassword] = useState("123456")
   const [message, setMessage] = useState("")
+  const router = useRouter()
 
   useEffect(() => {
     // listen to the change in the user state
@@ -41,6 +43,7 @@ function login() {
       const cred = await signInWithEmailAndPassword(auth, email, password)
       console.log("user has logged in ", cred.user)
       setMessage("user has logged in ")
+      router.push(NavNames.root)
     } catch (error) {
       setMessage(error.message)
     }

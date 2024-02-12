@@ -18,6 +18,7 @@ import {
   getTestsQueryApi,
   getTestsSnapApi,
 } from "@/api/firestore"
+import Navbar from "@/components/navbar"
 
 const newTest: Test = {
   name: "test12",
@@ -32,58 +33,60 @@ const HomePage = observer(() => {
     return () => unSubscribe()
   }, [])
   return (
-    <div className="w-[100vw] h-[100vh]">
-      <div className="w-full font-bold flex justify-center items-center ">
+    <div
+      className="w-full  h-[100vh] flex flex-col items-center  relative
+ overflow-hidden  "
+    >
+      <Navbar />
+      <div className="w-full flex justify-center items-center font-bold text-xl pb-10">
         test the data in firestroe{" "}
       </div>
-      <div className="w-full  flex justify-center items-center ">
-        the functions and structure will help you learn on the firestore and the
-        auth functions .{" "}
+      <div className="w-[50%]  flex flex-wrap justify-between gap-5 ">
+        <Button variant="outlined" className="" onClick={getTestsApi}>
+          get all tests
+        </Button>
+        <Button
+          variant="outlined"
+          className=""
+          onClick={
+            () => editTestApi("C6OGYvaAyHCrY7R8Oblk", { amount: 123 })
+            // editTest("C6OGYvaAyHCrY7R8Oblk", { name: "a new name is good" })
+          }
+        >
+          edit Test
+        </Button>
+        <Button variant="outlined" className="" onClick={getTestsQueryApi}>
+          get Tests Query
+        </Button>
+        <Button
+          variant="outlined"
+          className=""
+          onClick={() => getTestsByIdApi("4oKZubI3CdRGSvt7PckG")}
+        >
+          get Tests By Id
+        </Button>
+        <Button
+          variant="outlined"
+          className=""
+          onClick={() => addTestApi(newTest)}
+        >
+          add test
+        </Button>
+        <Button
+          variant="outlined"
+          className=""
+          onClick={() => deleteTestApi("747LODYvcIp3th66D0BL")}
+        >
+          delete test
+        </Button>
+        <Button
+          variant="outlined"
+          className=""
+          onClick={() => deleteAllTestsApi()}
+        >
+          delete all tests
+        </Button>
       </div>
-      <Button variant="outlined" className="" onClick={getTestsApi}>
-        get all tests
-      </Button>
-      <Button
-        variant="outlined"
-        className=""
-        onClick={
-          () => editTestApi("C6OGYvaAyHCrY7R8Oblk", { amount: 123 })
-          // editTest("C6OGYvaAyHCrY7R8Oblk", { name: "a new name is good" })
-        }
-      >
-        edit Test
-      </Button>
-      <Button variant="outlined" className="" onClick={getTestsQueryApi}>
-        get Tests Query
-      </Button>
-      <Button
-        variant="outlined"
-        className=""
-        onClick={() => getTestsByIdApi("4oKZubI3CdRGSvt7PckG")}
-      >
-        get Tests By Id
-      </Button>
-      <Button
-        variant="outlined"
-        className=""
-        onClick={() => addTestApi(newTest)}
-      >
-        add test
-      </Button>
-      <Button
-        variant="outlined"
-        className=""
-        onClick={() => deleteTestApi("747LODYvcIp3th66D0BL")}
-      >
-        delete test
-      </Button>
-      <Button
-        variant="outlined"
-        className=""
-        onClick={() => deleteAllTestsApi()}
-      >
-        delete all tests
-      </Button>
     </div>
   )
 })

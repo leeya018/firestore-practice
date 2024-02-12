@@ -12,4 +12,5 @@ export const NavNames = {
   signup: "/signup",
   login: "/login",
   home: "/home",
+  root: "/",
 }
