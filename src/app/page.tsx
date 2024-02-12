@@ -19,7 +19,9 @@ import {
   getTestsSnapApi,
 } from "@/api/firestore"
 import Navbar from "@/components/navbar"
-import { setConfig } from "next/config"
+import ProtectedRout from "@/components/protectedRout"
+import useAuth from "@/hooks/useAuth"
+import { useRouter } from "next/navigation"
 
 // const newTest: Test = {
 //   name: "test12",
@@ -30,16 +32,30 @@ const HomePage = observer(() => {
   const [name, setName] = useState<string>("")
   const [count, setCount] = useState<number>(0)
   const [testId, setTestId] = useState<string>("")
+  const { user, loading } = useAuth()
+  const router = useRouter()
+
   useEffect(() => {
-    // getTestsSnapApi()
-    const unSubscribe = getTestsByIdSnapApi("C6OGYvaAyHCrY7R8Oblk")
-    // getSnapshotForDocApi("test1")
-    return () => unSubscribe()
-  }, [])
+    if (!loading && !user) {
+      // Redirect to login if not authenticated
+      router.push("/login")
+    }
+  }, [user, loading, router])
+
+  if (loading || !user) {
+    return <div>Loading...</div> // or any loading indicator
+  }
+
+  // useEffect(() => {
+  //   // getTestsSnapApi()
+  //   const unSubscribe = getTestsByIdSnapApi("C6OGYvaAyHCrY7R8Oblk")
+  //   // getSnapshotForDocApi("test1")
+  //   return () => unSubscribe()
+  // }, [])
   return (
     <div
       className="w-full  h-[100vh] flex flex-col items-center  relative
- overflow-hidden  "
+      overflow-hidden  "
     >
       <Navbar />
       <div className="w-full flex justify-center items-center font-bold text-xl pb-10">

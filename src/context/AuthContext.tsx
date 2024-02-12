@@ -5,7 +5,6 @@ import {
   signOut,
   onAuthStateChanged,
   GoogleAuthProvider,
-  createUserWithEmailAndPassword,
 } from "firebase/auth"
 import { auth, db } from "@/firebase"
 import { useRouter } from "next/navigation"
@@ -33,7 +32,6 @@ export const AuthContextProvider = ({ children }: AuthContextProviderType) => {
   }, [user])
 
   const googleSignIn = async () => {
-    createUserWithEmailAndPassword()
     const provider = new GoogleAuthProvider()
     signInWithPopup(auth, provider)
       .then(async (UserCredentialImp) => {

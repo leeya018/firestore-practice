@@ -43,7 +43,7 @@ function Navbar() {
     try {
       setAnchorElUser(null)
       await signOut(auth)
-      router.push(NavNames.login)
+
       console.log("user Logged out")
     } catch (error) {
       console.log(error.message)
