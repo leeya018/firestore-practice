@@ -13,3 +13,5 @@
 ## useAuth hook to ensure protected routing to root home page
 
 ## option of protected rout component which I am not using but its commented out
+
+## main page root use can switch to page \_useAuth to make it the page.tsx
