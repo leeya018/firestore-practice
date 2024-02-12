@@ -90,8 +90,17 @@ export const deleteTest = async (testId: string) => {
   try {
     // get doc by its id
     const docRef = doc(db, "tests", testId)
+
+    const docItem = await getDoc(docRef)
+
+    if (!docItem.exists()) {
+      throw new Error(
+        "Could not delete test " + testId + " because it doesn't exist"
+      )
+    }
     // delet the doc by dhe doc ref
     await deleteDoc(docRef)
+    console.log("doc with id " + testId + " deleted")
   } catch (error) {
     console.log(error.message)
   }
@@ -182,18 +191,25 @@ export const getTestsQuery = async () => {
 }
 
 export const getTestsById = async (id: string) => {
-  // doc function return a docRef
-  const docRef = doc(db, "tests", id)
+  try {
+    // doc function return a docRef
+    const docRef = doc(db, "tests", id)
 
-  // get the doc from the getDoc function
-  const docItem = await getDoc(docRef)
+    // get the doc from the getDoc function
+    const docItem = await getDoc(docRef)
 
-  const testItem = {
-    ...docItem.data(),
-    id: docItem.id,
+    if (!docItem.exists()) {
+      throw new Error("doc with id " + id + "  not found")
+    }
+    console.log("docItem data ", docItem.data())
+    const testItem = {
+      ...docItem.data(),
+      id: docItem.id,
+    }
+    console.log(testItem)
+  } catch (error) {
+    console.log(error.message)
   }
-  console.log(testItem)
-  // const doc = await getDoc(colRef)
 }
 
 export const getTestsByIdSnap = (id: string) => {
@@ -209,9 +225,14 @@ export const getTestsByIdSnap = (id: string) => {
 }
 
 export const editTest = async (id: string, data: any) => {
-  const docRef = doc(db, "tests", id)
+  try {
+    const docRef = doc(db, "tests", id)
 
-  // the data is an object that can contain part of the fields of test
-  // its can contain all of the fields or just part of them
-  updateDoc(docRef, data)
+    // the data is an object that can contain part of the fields of test
+    // its can contain all of the fields or just part of them
+    await updateDoc(docRef, data)
+    console.log("doc with id: " + id + " updated")
+  } catch (error) {
+    console.log(error.message)
+  }
 }
